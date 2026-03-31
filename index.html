@@ -239,15 +239,6 @@
         .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 
         /* ── RESULTS ────────────────────────────────────────────────── */
-        .result-hero {
-            background: var(--primary-dark);
-            color: white;
-            padding: 32px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         .result-icon    { font-size: 46px; margin-bottom: 12px; }
         .result-profile { font-size: 28px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; }
         .result-score   { font-size: 12px; opacity: 0.7; margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
@@ -434,6 +425,189 @@
         .benefit-list li:last-child { border-bottom: none; }
         .benefit-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
 
+        /* ── MEJORA VISUAL RESULTADO ────────────────────────────────── */
+        .result-hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 36px 32px 28px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(21,42,69,0.25);
+            animation: fadeInUp 0.35s ease both;
+        }
+
+        /* Etiquetas de separación visual entre bloques */
+        .rec-block-label {
+            display: flex; align-items: center; gap: 10px;
+            margin: 18px 0 10px;
+        }
+        .rec-block-label .rec-tag {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 10px; border-radius: 4px;
+            font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .rec-tag.blue  { background: var(--primary); color: white; }
+        .rec-tag.green { background: var(--success); color: white; }
+        .rec-tag.amber { background: var(--warning); color: white; }
+        .rec-tag.red   { background: var(--accent);  color: white; }
+        .rec-block-label .rec-label-text {
+            font-size: 14px; font-weight: 700; color: var(--primary);
+        }
+        .rec-block-divider {
+            flex: 1; height: 1px; background: var(--border); margin-left: 6px;
+        }
+
+        /* FM Sugerido — misma base que cartera-card pero color accent */
+        .fm-sugerido-wrap .cartera-card .cartera-head { }
+
+        /* ── SIMULADOR: layout gráfico + panel cartera ──────────────── */
+        .sim-chart-layout {
+            display: grid;
+            grid-template-columns: 1fr 230px;
+            gap: 16px;
+            align-items: start;
+            margin-top: 16px;
+        }
+        @media (max-width: 900px) { .sim-chart-layout { grid-template-columns: 1fr; } }
+
+        /* Panel cartera sugerida (lado derecho del gráfico) */
+        .sim-cartera-panel {
+            background: var(--bg-white);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: border-color 0.3s ease;
+        }
+        .sim-cartera-panel-title {
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.6px; color: var(--text-muted); margin-bottom: 8px;
+        }
+        .sim-cartera-panel-name {
+            font-size: 12px; font-weight: 700; color: white;
+            padding: 7px 10px; border-radius: 6px; margin-bottom: 10px;
+            text-align: center; transition: background 0.3s ease;
+        }
+        .sim-cartera-distrib-row {
+            display: flex; align-items: center; gap: 6px;
+            margin-bottom: 5px; font-size: 10.5px;
+        }
+        .sim-cartera-distrib-dot {
+            height: 7px; border-radius: 3px; flex-shrink: 0;
+        }
+
+        /* Fila "Cartera Sugerida" debajo del form-grid */
+        .sim-cartera-sugerida-row {
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+            margin-top: 12px; padding: 10px 14px;
+            background: #F8FAFC; border-radius: 6px; border: 1px solid var(--border);
+        }
+        .sim-cartera-sugerida-label {
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.6px; color: var(--text-muted); white-space: nowrap;
+        }
+        .sim-cartera-badge {
+            font-size: 12px; font-weight: 700; color: white;
+            padding: 4px 14px; border-radius: 4px;
+            background: var(--primary); transition: background 0.3s ease;
+        }
+        .sim-cartera-rate {
+            font-size: 10px; color: var(--text-muted); margin-left: auto;
+        }
+
+        /* ── COMPOSICIÓN CARTERAS (sección Estrategias) ─────────────── */
+        .cartera-fid-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        /* Fichas más compactas en la sección de composición */
+        .cartera-fid-grid .cartera-card { margin-bottom: 0; }
+        .cartera-fid-grid .cartera-body { padding: 12px 16px; }
+        .cartera-fid-grid .cartera-desc { font-size: 11.5px; line-height: 1.55; }
+        .cartera-fid-grid .distrib-label { min-width: 150px; }
+        @media (max-width: 900px) { .cartera-fid-grid { grid-template-columns: 1fr; } }
+
+        /* Badge de condición dentro del header de la cartera */
+        .cartera-cond-badge {
+            font-size: 9px; background: rgba(255,255,255,0.2);
+            border-radius: 4px; padding: 3px 8px;
+            white-space: nowrap; flex-shrink: 0;
+            line-height: 1.5; text-align: right;
+            align-self: flex-start;
+        }
+        .cartera-head-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+
+        /* ── CARTERA FIDELIZACIÓN ───────────────────────────────────── */
+        .cartera-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .cartera-card {
+            background: var(--bg-white);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: box-shadow 0.22s ease;
+        }
+        .cartera-card:hover { box-shadow: 0 6px 22px rgba(0,0,0,0.11); }
+        .cartera-head { padding: 14px 20px; color: white; }
+        .cartera-type { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .cartera-name { font-size: 14px; font-weight: 700; margin-top: 3px; }
+        .cartera-plazo { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+        .cartera-body { padding: 18px 20px; }
+        /* Bloque descripción mejorado */
+        .cartera-desc-block {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary-light);
+            border-radius: 0 6px 6px 0;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+        }
+        .cartera-desc-block-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .cartera-desc {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Fade-in para resultados */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .cartera-card { animation: fadeInUp 0.3s ease both; }
+        #resultsArea { animation: fadeInUp 0.35s ease both; }
+        .distrib-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin-bottom: 8px; }
+        .distrib-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+        .distrib-row:last-child { border-bottom: none; }
+        .distrib-label { min-width: 190px; color: var(--text-secondary); }
+        .distrib-bar-wrap { flex: 1; display: flex; align-items: center; gap: 6px; }
+        .distrib-bar { height: 7px; border-radius: 4px; min-width: 4px; }
+        .distrib-pct { font-weight: 700; color: var(--text-primary); font-size: 11px; white-space: nowrap; min-width: 32px; }
+        .cartera-retornos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+        .ret-box { background: #F8FAFC; border: 1px solid var(--border); border-radius: 6px; padding: 8px; text-align: center; }
+        .ret-label { font-size: 9px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 3px; }
+        .ret-value { font-size: 15px; font-weight: 700; color: var(--success); }
+        .date-label { font-size: 10px; color: var(--text-muted); text-align: right; margin-top: 8px; font-style: italic; }
+        .riesgo-meter { display: flex; gap: 3px; margin-top: 6px; }
+        .riesgo-dot { width: 20px; height: 7px; border-radius: 4px; background: var(--border); }
+        .riesgo-dot.active-low  { background: var(--success); }
+        .riesgo-dot.active-mid  { background: var(--warning); }
+        .riesgo-dot.active-high { background: var(--accent); }
+
         /* Footer */
         .footer { background: var(--primary-dark); color: white; padding: 24px 40px; margin-top: 48px; }
         .footer-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
@@ -550,8 +724,35 @@
                 <div class="stat-box"><div class="stat-value" id="statRie">Medio</div><div class="stat-label">Nivel de riesgo</div></div>
             </div>
 
-            <div class="section-title">📈 Productos Recomendados</div>
+            <!-- BLOQUE A: Cartera de Fidelización (rf_mp / est_conservadora / est_moderada / est_agresiva) -->
+            <div class="rec-block-label">
+                <span class="rec-tag blue">🏦 Cartera</span>
+                <span class="rec-label-text">Cartera de Fidelización Recomendada</span>
+                <div class="rec-block-divider"></div>
+            </div>
+            <div id="carteraArea"></div>
+
+            <!-- BLOQUE B: Fondo Mutuo Dinámico Sugerido (1 FM según perfil) -->
+            <div class="rec-block-label" id="fmSugeridoTitulo" style="display:none;">
+                <span class="rec-tag green">💼 Fondo Mutuo</span>
+                <span class="rec-label-text">Fondo Mutuo Dinámico Sugerido</span>
+                <div class="rec-block-divider"></div>
+            </div>
+            <div id="fmArea" class="fm-sugerido-wrap"></div>
+
+            <!-- BLOQUE C: Otras alternativas de fondos (FM distintos al sugerido en Bloque B) -->
+            <div class="rec-block-label" id="altFondosTitulo" style="display:none;">
+                <span class="rec-tag amber">📊 Alternativas</span>
+                <span class="rec-label-text">Otras alternativas de fondos</span>
+                <div class="rec-block-divider"></div>
+            </div>
             <div class="products-row" id="productsArea"></div>
+
+            <div class="disclaimer" style="margin-top:6px; margin-bottom:16px;">
+                <strong>📅 Rentabilidades al cierre de febrero de 2026.</strong>
+                Las rentabilidades están expresadas en valores nominales en pesos chilenos.
+                Las rentabilidades pasadas no garantizan rentabilidades futuras.
+            </div>
 
             <div class="share-bar">
                 <span class="share-label">Compartir resultado:</span>
@@ -562,7 +763,7 @@
         </div>
 
         <div class="source-box">
-            <strong>Fuentes:</strong> Normativa CMF (<a href="https://urldefense.com/v3/__http://cmfchile.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUoPURxgX$">cmfchile.cl</a>), NCG N°30, DL 3.500. Datos públicos y regulatorios — no se almacena información del cliente.
+            <strong>Fuentes:</strong> Normativa CMF (cmfchile.cl), NCG N°30, DL 3.500. Datos públicos y regulatorios — no se almacena información del cliente.
         </div>
     </section>
 
@@ -680,12 +881,13 @@
                 <div class="disclaimer">
                     <strong>⚠️ Información referencial e ilustrativa.</strong> Las proyecciones se basan en rentabilidades históricas 2025.
                     <strong>Las rentabilidades pasadas no garantizan rentabilidades futuras.</strong> Consulte con su ejecutivo antes de invertir.
+                    Proyecciones calculadas con valores al 27/03/2026.
                 </div>
             </div>
         </div>
 
         <div class="source-box">
-            <strong>Fuentes:</strong> Rentabilidades CMF (<a href="https://urldefense.com/v3/__http://cmfchile.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUoPURxgX$">cmfchile.cl</a>), Reportes LVAM, datos Consorcio Fondos. Datos públicos de mercado — no se cargan datos sensibles.
+            <strong>Fuentes:</strong> Rentabilidades CMF (cmfchile.cl), Reportes LVAM, datos Consorcio Fondos. Datos públicos de mercado — no se cargan datos sensibles.
         </div>
     </section>
 
@@ -783,6 +985,8 @@
                 <div>
                     <label class="form-label">Plazo</label>
                     <select id="simPlazo" class="form-select" onchange="calcStrategy()">
+                        <option value="1">1 año</option>
+                        <option value="2">2 años</option>
                         <option value="3">3 años</option>
                         <option value="5" selected>5 años</option>
                         <option value="7">7 años</option>
@@ -792,17 +996,25 @@
                     </select>
                 </div>
                 <div>
-                    <label class="form-label">Perfil de Riesgo</label>
-                    <select id="simPerfil" class="form-select" onchange="calcStrategy()">
-                        <option value="conservador">Conservador (5% anual)</option>
-                        <option value="moderado" selected>Moderado (8% anual)</option>
-                        <option value="agresivo">Agresivo (12% anual)</option>
+                    <!-- Objetivo del cliente (reemplaza selección manual de perfil) -->
+                    <label class="form-label">Objetivo del Cliente</label>
+                    <select id="simObjetivo" class="form-select" onchange="calcStrategy()">
+                        <option value="estudios">🎓 Ahorro para estudios</option>
+                        <option value="caja">🏦 Fondo de caja</option>
+                        <option value="pension">👴 Pensión / vejez</option>
                     </select>
                 </div>
                 <div>
                     <label class="form-label">Inflación Esperada (%)</label>
                     <input type="number" id="simInflacion" class="form-input" value="3" step="0.5" onchange="calcStrategy()">
                 </div>
+            </div>
+
+            <!-- Cartera Sugerida — se actualiza automáticamente al cambiar plazo -->
+            <div class="sim-cartera-sugerida-row">
+                <span class="sim-cartera-sugerida-label">Cartera Sugerida</span>
+                <div id="simCarteraSugeridaBadge" class="sim-cartera-badge">Estrategia Agresiva</div>
+                <span id="simCarteraRate" class="sim-cartera-rate">Tasa ref.: 10.30% anual</span>
             </div>
 
             <div class="sim-results">
@@ -816,8 +1028,18 @@
                 <strong>Beneficio Serie F:</strong> Al mantener 5+ años accede a comisiones reducidas y puede diferir impuestos con Art. 108 LIR.
             </div>
 
-            <div class="chart-container" style="height: 280px;"><canvas id="strategyChart"></canvas></div>
+            <!-- Layout 2 columnas: gráfico izquierda + panel cartera derecha -->
+            <div class="sim-chart-layout">
+                <div class="chart-container" style="height: 280px;"><canvas id="strategyChart"></canvas></div>
+                <div id="simCarteraPanel" class="sim-cartera-panel">
+                    <!-- renderizado por updateSimCarteraDisplay() -->
+                </div>
+            </div>
         </div>
+
+        <!-- ── Composición de Carteras de Fidelización ───────────── -->
+        <div class="section-title" style="margin-top:4px;">🏗️ Carteras de Fidelización — Composición y Condición de Uso</div>
+        <div id="carterasComposicionArea" class="cartera-fid-grid"></div>
 
         <div class="card">
             <div class="card-header">
@@ -842,6 +1064,7 @@
 
         <div class="source-box">
             <strong>Fuentes:</strong> DL 3.500 (Pensiones), DL 824 Art. 42 bis (APV), Ley 20.712 (Fondos Mutuos), NCG CMF. Las simulaciones son ilustrativas y no constituyen asesoría de inversión.
+            Rentabilidades al cierre de febrero 2026. Fuente LVAM.
         </div>
     </section>
 
@@ -971,7 +1194,7 @@
         </div>
 
         <div class="source-box" style="margin-top: 20px;">
-            <strong>Fuentes Oficiales:</strong> CMF Chile (<a href="https://urldefense.com/v3/__http://cmfchile.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUoPURxgX$">cmfchile.cl</a>), CMF Educa (<a href="https://urldefense.com/v3/__http://cmfeduca.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUuIMJezk$">cmfeduca.cl</a>), SII (<a href="https://urldefense.com/v3/__http://sii.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUqMZLZD7$">sii.cl</a>), Superintendencia de Pensiones (<a href="https://urldefense.com/v3/__http://spensiones.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUrKFX4lC$">spensiones.cl</a>), BCN (<a href="https://urldefense.com/v3/__http://bcn.cl__;!!MU3JInL88t7ES80!TQA3N8Ydk-cKuMB52pkIf0djPxSf8KQatG1WM9eEqWgrkQbDcn9ubpAVJL4a-SOTGr39XWKGmIuT5SSiUtTiV8xl$">bcn.cl</a>). Datos públicos y regulatorios. Valores UF/UTM referenciales al 29/03/2026.
+            <strong>Fuentes Oficiales:</strong> CMF Chile (cmfchile.cl), CMF Educa (cmfeduca.cl), SII (sii.cl), Superintendencia de Pensiones (spensiones.cl), BCN (bcn.cl). Datos públicos y regulatorios. Valores UF/UTM referenciales al 29/03/2026.
         </div>
     </section>
 </main>
@@ -1048,6 +1271,125 @@
             da:   { n: 'FM CNS Dinámico Agresivo',    y25: 16.79, vol: 9.79 },
             acc:  { n: 'FM LV Acciones Nacionales',   y25: 62.97, vol: 17.57 },
             lat:  { n: 'FM LV Latinoamericano',       y25: 46.28, vol: 21.94 }
+        }
+    };
+
+    // ══════════════════════════════════════════════════════════════════
+    // CARTERAS DE FIDELIZACIÓN — fuente: PDF "Carteras fidelización"
+    // Rentabilidades al cierre de febrero 2026. Fuente LVAM.
+    // ══════════════════════════════════════════════════════════════════
+    const CARTERAS = {
+        // ── Renta Fija ────────────────────────────────────────────────
+        rf_mp: {
+            nombre: 'Cartera RF MP',
+            tipo:   'Renta Fija Mediano Plazo',
+            color:  '#0F766E',
+            plazo:  'De 6 a 12 meses · Duración prom. 2.3 años',
+            desc:   'Busca oportunidad a escenario de baja de tasas. Exposición mayoritaria a UF.',
+            retornos: { m12: 4.66, m6: 1.91, m3: 1.06 },
+            distribucion: [
+                { fondo: 'LV Ahorro UF',      pct: 50 },
+                { fondo: 'LV Ahorro Capital',  pct: 50 }
+            ]
+        },
+        // ── Estrategias Balanceadas ────────────────────────────────────
+        est_conservadora: {
+            nombre: 'Estrategia Conservadora',
+            tipo:   'Cartera Balanceada — Riesgo Bajo',
+            color:  '#0F766E',
+            riesgo: 1, riesgoMax: 5,
+            plazo:  'Desde 1 año',
+            desc:   'El principal pilar está en la renta fija local de duración media y la mayor exposición relativa a UF. Durante febrero los productos subyacentes aumentaron en el margen la exposición a UF.',
+            retornos: null,
+            distribucion: [
+                { fondo: 'LV Monetario',                   pct: 5  },
+                { fondo: 'LV Ahorro Capital',               pct: 5  },
+                { fondo: 'Consorcio Ahorro Dinámico',       pct: 20 },
+                { fondo: 'LV Ahorro Dólar',                 pct: 10 },
+                { fondo: 'Consorcio Dinámico Moderado',     pct: 60 }
+            ]
+        },
+        est_moderada: {
+            nombre: 'Estrategia Moderada',
+            tipo:   'Cartera Balanceada — Riesgo Medio',
+            color:  '#B45309',
+            riesgo: 3, riesgoMax: 5,
+            plazo:  'Desde 2 años',
+            desc:   'El principal pilar está en la renta fija local de duración media y la mayor exposición relativa a UF. Además, incrementamos la exposición en acciones latinoamericanas en desmedro de acciones en Estados Unidos.',
+            retornos: null,
+            distribucion: [
+                { fondo: 'LV Ahorro Capital',               pct: 5  },
+                { fondo: 'Consorcio Ahorro Dinámico',       pct: 15 },
+                { fondo: 'LV Bonos Latam',                  pct: 10 },
+                { fondo: 'LV Latinoamericano',              pct: 5  },
+                { fondo: 'LV Acciones Nacionales',          pct: 5  },
+                { fondo: 'Consorcio Dinámico Balanceado',   pct: 60 }
+            ]
+        },
+        est_agresiva: {
+            nombre: 'Estrategia Agresiva',
+            tipo:   'Cartera Balanceada — Riesgo Alto',
+            color:  '#8B1D2A',
+            riesgo: 5, riesgoMax: 5,
+            plazo:  'Desde 3 años',
+            desc:   'El principal pilar descansa sobre la renta variable y renta fija de mercados emergentes. Durante febrero el principal cambio fue el incremento de la exposición en acciones latinoamericanas.',
+            retornos: null,
+            distribucion: [
+                { fondo: 'Consorcio Ahorro Dinámico',       pct: 5  },
+                { fondo: 'LV Acciones Nacionales',          pct: 10 },
+                { fondo: 'LV Asia',                         pct: 5  },
+                { fondo: 'LV Estados Unidos',               pct: 5  },
+                { fondo: 'LV Europa',                       pct: 5  },
+                { fondo: 'LV Bonos Latam',                  pct: 5  },
+                { fondo: 'LV Latinoamericano',              pct: 5  },
+                { fondo: 'Consorcio Dinámico Agresivo',     pct: 60 }
+            ]
+        },
+        // ── FM Dinámicos (fuente: reporte feb 2026, pág.4) ────────────
+        fm_dc: {
+            nombre: 'FM CNS Dinámico Conservador',
+            tipo:   'Fondo Mutuo Dinámico · Serie P',
+            color:  '#0F766E',
+            plazo:  'Hasta 1 año',
+            desc:   'Fondo dinámico con sesgo conservador. Inversión mínima 70% en renta fija local e internacional.',
+            retornos: { m12: 6.16, m6: 2.19, m3: 1.06, y2025: 6.80 },
+            distribucion: null
+        },
+        fm_dm: {
+            nombre: 'FM CNS Dinámico Moderado',
+            tipo:   'Fondo Mutuo Dinámico · Serie P',
+            color:  '#0F766E',
+            plazo:  'Hasta 2 años',
+            desc:   'Fondo dinámico moderado. Inversión mínima 70% en renta fija local e internacional.',
+            retornos: { m12: 7.97, m6: 2.75, m3: 1.32, y2025: 7.94 },
+            distribucion: null
+        },
+        fm_db: {
+            nombre: 'FM CNS Dinámico Balanceado',
+            tipo:   'Fondo Mutuo Dinámico · Serie P',
+            color:  '#B45309',
+            plazo:  'Hasta 2 años',
+            desc:   'Fondo dinámico balanceado. Inversión mínima 50% en renta fija local e internacional.',
+            retornos: { m12: 9.41, m6: 3.20, m3: 1.65, y2025: 8.68 },
+            distribucion: null
+        },
+        fm_dcr: {
+            nombre: 'FM CNS Dinámico Crecimiento',
+            tipo:   'Fondo Mutuo Dinámico · Serie P',
+            color:  '#B45309',
+            plazo:  'Hasta 3 años',
+            desc:   'Fondo dinámico con mayor exposición a renta variable. Objetivo: crecimiento de largo plazo.',
+            retornos: { m12: 12.08, m6: 3.57, m3: 1.90, y2025: 10.30 },
+            distribucion: null
+        },
+        fm_da: {
+            nombre: 'FM CNS Dinámico Agresivo',
+            tipo:   'Fondo Mutuo Dinámico · Serie APV',
+            color:  '#8B1D2A',
+            plazo:  'Hasta 3 años',
+            desc:   'Fondo dinámico con sesgo agresivo. Inversión mínima 70% en renta variable tanto local como internacional.',
+            retornos: { m12: 14.39, m6: 3.32, m3: 1.65, y2025: 12.06 },
+            distribucion: null
         }
     };
 
@@ -1200,13 +1542,15 @@
         selHorizonte = String(horizQ2);
         serieRes = { '1': 'A', '2': 'P', '3': 'F', '4': 'APV' }[selHorizonte];
 
-        // Puntaje total: rango 6–24
+        // Puntaje total: rango 6–24 → 5 perfiles (alineados con PDF Carteras Fidelización)
         const sum = vals.reduce((a, b) => a + b, 0);
         let icon, desc, tol, risk;
 
-        if      (sum <= 11) { perfil = 'Conservador'; icon = '🛡️'; desc = 'Valora la seguridad por sobre la rentabilidad. Se recomienda instrumentos de bajo riesgo y alta liquidez.';           tol = 'Baja';     risk = 'Bajo'; }
-        else if (sum <= 17) { perfil = 'Moderado';    icon = '⚖️'; desc = 'Busca un equilibrio entre crecimiento y estabilidad. Acepta cierta volatilidad a cambio de mejores retornos.';  tol = 'Moderada'; risk = 'Medio'; }
-        else                { perfil = 'Agresivo';    icon = '🚀'; desc = 'Orientado al crecimiento a largo plazo. Dispuesto a asumir mayor volatilidad para maximizar la rentabilidad.';   tol = 'Alta';     risk = 'Alto'; }
+        if      (sum <= 10) { perfil = 'Conservador'; icon = '🛡️'; desc = 'Valora la seguridad por sobre la rentabilidad. Se recomienda instrumentos de bajo riesgo y alta liquidez.';                                      tol = 'Baja';      risk = 'Bajo';   }
+        else if (sum <= 14) { perfil = 'Moderado';    icon = '⚖️'; desc = 'Busca un equilibrio entre crecimiento y estabilidad. Acepta cierta volatilidad a cambio de mejores retornos.';                                  tol = 'Moderada';  risk = 'Medio';  }
+        else if (sum <= 18) { perfil = 'Balanceado';  icon = '🔵'; desc = 'Acepta oscilaciones moderadas del mercado a cambio de un mayor potencial de crecimiento en el mediano plazo.';                                   tol = 'Media-Alta'; risk = 'Medio-Alto'; }
+        else if (sum <= 21) { perfil = 'Crecimiento'; icon = '📈'; desc = 'Orientado al crecimiento, dispuesto a asumir mayor volatilidad para maximizar el rendimiento a largo plazo.';                                    tol = 'Alta';      risk = 'Alto';   }
+        else                { perfil = 'Agresivo';    icon = '🚀'; desc = 'Maximiza el rendimiento asumiendo alta exposición a renta variable. Horizonte de largo plazo, tolera pérdidas temporales significativas.';  tol = 'Muy Alta';  risk = 'Muy Alto'; }
 
         const horMap = { '1': '< 1 año', '2': '2–5 años', '3': '5–7 años', '4': '> 7 años' };
         const serMap = { '1': 'A',       '2': 'P',        '3': 'F',        '4': 'APV-AP' };
@@ -1220,44 +1564,240 @@
         document.getElementById('statSer').textContent    = serMap[selHorizonte];
         document.getElementById('statRie').textContent    = risk;
 
-        // Productos recomendados según perfil y serie
-        const area = document.getElementById('productsArea');
-        area.innerHTML = '';
-        const src  = DATA[serieRes] || DATA.A;
-        const keys = perfil === 'Conservador' ? ['mon', 'cap', 'dc']  :
-                     perfil === 'Moderado'    ? ['dc',  'db',  'cap'] :
-                                               ['da',  'acc', 'lat'];
-        keys.forEach((k, i) => {
-            const d = src[k];
-            const card = document.createElement('div');
-            card.className = 'product-card' + (i === 0 ? ' top' : '');
-            card.innerHTML = `
-                ${i === 0 ? '<div class="product-badge">★ Principal recomendado</div>' : ''}
-                <div class="product-head">
-                    <div class="product-type">Serie ${serieRes === 'APV' ? 'APV-AP' : serieRes}</div>
-                    <div class="product-name">${d.n}</div>
-                </div>
-                <div class="product-body">
-                    <div class="product-row">
-                        <span class="product-row-label">Rentabilidad 2025</span>
-                        <span class="product-row-value ${d.y25 >= 0 ? 'up' : 'down'}">${d.y25.toFixed(2)}%</span>
-                    </div>
-                    <div class="product-row">
-                        <span class="product-row-label">Volatilidad</span>
-                        <span class="product-row-value">${d.vol.toFixed(2)}%</span>
-                    </div>
-                </div>`;
-            area.appendChild(card);
-        });
+        // ── Bloque A: Cartera de Fidelización (solo rf_mp / est_*) ─────
+        renderCartera();
+
+        // ── Bloque B: Fondo Mutuo Dinámico Sugerido (1 FM por perfil) ──
+        renderFMSugerido();
+
+        // ── Bloque C: Otras alternativas FM (sin duplicar el del Bloque B) ─
+        renderOtrasAlternativas();
 
         document.getElementById('resultsArea').style.display = 'block';
         document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // ══════════════════════════════════════════════════════════════════
+    // LÓGICA SEPARADA: CARTERA DE FIDELIZACIÓN vs FM DINÁMICO
+    // ══════════════════════════════════════════════════════════════════
+
+    // Cartera de Fidelización por perfil (siempre una cartera pura, nunca un FM)
+    // Fuente: PDF "Carteras fidelización"
+    function getCarteraFidelizacion(p) {
+        if (p === 'Conservador') return 'rf_mp';
+        if (p === 'Moderado')    return 'est_conservadora';
+        if (p === 'Balanceado')  return 'est_moderada';
+        if (p === 'Crecimiento') return 'est_agresiva';
+        if (p === 'Agresivo')    return 'est_agresiva';
+        return null;
+    }
+
+    // FM Dinámico sugerido por perfil (un solo fondo, mostrado en bloque separado)
+    function getFMSugerido(p) {
+        if (p === 'Conservador') return 'fm_dc';
+        if (p === 'Moderado')    return 'fm_dm';
+        if (p === 'Balanceado')  return 'fm_db';
+        if (p === 'Crecimiento') return 'fm_dcr';
+        if (p === 'Agresivo')    return 'fm_da';
+        return null;
+    }
+
+    // Clave DATA para el FM sugerido (para excluirlo en "otras alternativas")
+    var FM_A_DATA_KEY = { fm_dc: 'dc', fm_dm: 'dm', fm_db: 'db', fm_dcr: 'dcr', fm_da: 'da' };
+
+    // ── Genera HTML de la distribución de fondos ──────────────────────
+    function buildDistribHTML(c) {
+        if (!c || !c.distribucion || !c.distribucion.length) return '';
+        var barColor = c.color || '#1E3A5F';
+        var rows = c.distribucion.map(function(item) {
+            return '<div class="distrib-row">'
+                + '<div class="distrib-label">' + item.fondo + '</div>'
+                + '<div class="distrib-bar-wrap">'
+                + '<div class="distrib-bar" style="width:' + item.pct + '%;background:' + barColor + ';"></div>'
+                + '<span class="distrib-pct">' + item.pct + '%</span>'
+                + '</div>'
+                + '</div>';
+        }).join('');
+        return '<div class="distrib-title">Distribución de Fondos</div>' + rows;
+    }
+
+    // ── Genera HTML de retornos ───────────────────────────────────────
+    function buildRetornosHTML(c) {
+        if (!c || !c.retornos) return '';
+        var r = c.retornos;
+        var boxes = '';
+        if (r.m12  != null) boxes += '<div class="ret-box"><div class="ret-label">Últ. 12M</div><div class="ret-value">' + r.m12.toFixed(2) + '%</div></div>';
+        if (r.m6   != null) boxes += '<div class="ret-box"><div class="ret-label">Últ. 6M</div><div class="ret-value">'  + r.m6.toFixed(2)  + '%</div></div>';
+        if (r.m3   != null) boxes += '<div class="ret-box"><div class="ret-label">Últ. 3M</div><div class="ret-value">'  + r.m3.toFixed(2)  + '%</div></div>';
+        if (r.y2025 != null) boxes += '<div class="ret-box"><div class="ret-label">Año 2025</div><div class="ret-value">' + r.y2025.toFixed(2) + '%</div></div>';
+        if (!boxes) return '';
+        return '<div class="cartera-retornos">' + boxes + '</div>'
+             + '<div class="date-label">* Rentabilidades al cierre de febrero 2026. Fuente LVAM.</div>';
+    }
+
+    // ── Genera HTML del medidor de riesgo ─────────────────────────────
+    function buildRiesgoHTML(c) {
+        if (!c || c.riesgo == null) return '';
+        var dotClass = c.riesgo <= 2 ? 'active-low' : c.riesgo <= 3 ? 'active-mid' : 'active-high';
+        var dots = [1,2,3,4,5].map(function(n) {
+            return '<div class="riesgo-dot' + (n <= c.riesgo ? ' ' + dotClass : '') + '"></div>';
+        }).join('');
+        return '<div style="font-size:10px;color:var(--text-muted);margin-top:10px;">Nivel de riesgo</div>'
+             + '<div class="riesgo-meter">' + dots
+             + '<span style="font-size:10px;color:var(--text-muted);margin-left:6px;">' + c.riesgo + ' / 5</span>'
+             + '</div>';
+    }
+
+    // ── Construye el HTML de una cartera — base (sin badge de condición) ────
+    function buildCarteraperHTML(c) {
+        if (!c) return '';
+        var descBlock = '';
+        if (c.desc) {
+            descBlock = '<div class="cartera-desc-block">'
+                      + '<div class="cartera-desc-block-title">Detalle de la estrategia</div>'
+                      + '<div class="cartera-desc">' + c.desc + '</div>'
+                      + '</div>';
+        }
+        return '<div class="cartera-card">'
+            + '<div class="cartera-head" style="background:' + (c.color || '#1E3A5F') + ';">'
+            +   '<div class="cartera-type">'  + (c.tipo   || '') + '</div>'
+            +   '<div class="cartera-name">'  + (c.nombre || '') + '</div>'
+            +   '<div class="cartera-plazo">⏱ ' + (c.plazo || '') + '</div>'
+            + '</div>'
+            + '<div class="cartera-body">'
+            +   descBlock
+            +   buildDistribHTML(c)
+            +   buildRiesgoHTML(c)
+            +   buildRetornosHTML(c)
+            + '</div>'
+            + '</div>';
+    }
+
+    // ── Versión con badge de condición (usada en sección Estrategias) ─────
+    function buildCarteraperHTMLConCondicion(c, condicion) {
+        if (!c) return '';
+        var descBlock = '';
+        if (c.desc) {
+            descBlock = '<div class="cartera-desc-block">'
+                      + '<div class="cartera-desc-block-title">¿Por qué se sugiere?</div>'
+                      + '<div class="cartera-desc">' + c.desc + '</div>'
+                      + '</div>';
+        }
+        return '<div class="cartera-card">'
+            + '<div class="cartera-head" style="background:' + (c.color || '#1E3A5F') + ';display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">'
+            +   '<div>'
+            +     '<div class="cartera-type">'  + (c.tipo   || '') + '</div>'
+            +     '<div class="cartera-name">'  + (c.nombre || '') + '</div>'
+            +     '<div class="cartera-plazo">⏱ ' + (c.plazo || '') + '</div>'
+            +   '</div>'
+            +   '<div class="cartera-cond-badge">' + condicion + '</div>'
+            + '</div>'
+            + '<div class="cartera-body">'
+            +   descBlock
+            +   buildDistribHTML(c)
+            +   buildRiesgoHTML(c)
+            + '</div>'
+            + '</div>';
+    }
+
+    // ── Bloque A: Renderiza SOLO la Cartera de Fidelización ──────────────
+    function renderCartera() {
+        var area = document.getElementById('carteraArea');
+        if (!area) return;
+        var key = getCarteraFidelizacion(perfil);
+        if (!key || !CARTERAS[key]) {
+            area.innerHTML = '<div class="source-box">No hay cartera configurada para este perfil.</div>';
+            return;
+        }
+        area.innerHTML = buildCarteraperHTML(CARTERAS[key]);
+    }
+
+    // ── Bloque B: Renderiza el FM Dinámico Sugerido (1 card) ─────────────
+    function renderFMSugerido() {
+        var area   = document.getElementById('fmArea');
+        var titulo = document.getElementById('fmSugeridoTitulo');
+        if (!area) return;
+        var key = getFMSugerido(perfil);
+        if (!key || !CARTERAS[key]) {
+            area.innerHTML = '';
+            if (titulo) titulo.style.display = 'none';
+            return;
+        }
+        if (titulo) titulo.style.display = 'flex';
+        area.innerHTML = buildCarteraperHTML(CARTERAS[key]);
+    }
+
+    // ── Bloque C: Otras alternativas FM (excluye el del Bloque B) ────────
+    function renderOtrasAlternativas() {
+        var area    = document.getElementById('productsArea');
+        var titulo  = document.getElementById('altFondosTitulo');
+        if (!area) return;
+
+        area.innerHTML = '';
+        var src = DATA[serieRes] || DATA.A;
+
+        // Keys base según perfil
+        var allKeys = perfil === 'Conservador' ? ['mon', 'cap', 'dc']  :
+                      perfil === 'Moderado'    ? ['dc',  'dm',  'cap'] :
+                      perfil === 'Balanceado'  ? ['dm',  'db',  'cap'] :
+                      perfil === 'Crecimiento' ? ['db',  'dcr', 'da']  :
+                                                ['dcr', 'da',  'acc'];
+
+        // Excluir la clave que ya se muestra en el Bloque B
+        var mainFMKey = FM_A_DATA_KEY[getFMSugerido(perfil)] || null;
+        var filteredKeys = allKeys.filter(function(k) { return k !== mainFMKey; });
+
+        if (filteredKeys.length === 0) {
+            if (titulo) titulo.style.display = 'none';
+            return;
+        }
+        if (titulo) titulo.style.display = 'flex';
+
+        filteredKeys.forEach(function(k) {
+            var d = src[k];
+            if (!d) return;
+            var card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = '<div class="product-head">'
+                + '<div class="product-type">Serie ' + (serieRes === 'APV' ? 'APV-AP' : serieRes) + '</div>'
+                + '<div class="product-name">' + d.n + '</div>'
+                + '</div>'
+                + '<div class="product-body">'
+                + '<div class="product-row"><span class="product-row-label">Rentabilidad 2025</span>'
+                + '<span class="product-row-value ' + (d.y25 >= 0 ? 'up' : 'down') + '">' + d.y25.toFixed(2) + '%</span></div>'
+                + '<div class="product-row"><span class="product-row-label">Volatilidad</span>'
+                + '<span class="product-row-value">' + d.vol.toFixed(2) + '%</span></div>'
+                + '</div>';
+            area.appendChild(card);
+        });
+    }
+
+    // ── Composición de Carteras en sección Estrategias ───────────────────
+    function renderComposicionCarteras() {
+        var area = document.getElementById('carterasComposicionArea');
+        if (!area) return;
+        var items = [
+            { key: 'rf_mp',            condicion: 'Conservador · Horizonte ≤ 1 año' },
+            { key: 'est_conservadora', condicion: 'Moderado · Horizonte > 1 año'    },
+            { key: 'est_moderada',     condicion: 'Balanceado · Horizonte > 2 años' },
+            { key: 'est_agresiva',     condicion: 'Crecimiento/Agresivo · > 3 años' }
+        ];
+        var html = '';
+        items.forEach(function(item) {
+            var c = CARTERAS[item.key];
+            if (c) html += buildCarteraperHTMLConCondicion(c, item.condicion);
+        });
+        area.innerHTML = html;
+    }
+
     function resetForm() {
         document.querySelectorAll('.question-compact input').forEach(i => i.checked = false);
         document.querySelectorAll('.option-compact').forEach(o => o.classList.remove('selected'));
-        document.getElementById('resultsArea').style.display = 'none';
+        document.getElementById('resultsArea').style.display    = 'none';
+        document.getElementById('fmSugeridoTitulo').style.display = 'none';
+        document.getElementById('altFondosTitulo').style.display   = 'none';
+        var fmArea = document.getElementById('fmArea');
+        if (fmArea) fmArea.innerHTML = '';
         document.getElementById('progressFill').style.width  = '0%';
         document.getElementById('progressText').textContent  = '0';
         selHorizonte = null; perfil = null; serieRes = 'A';
@@ -1401,6 +1941,63 @@
     // ══════════════════════════════════════════════════════════════════
     // ESTRATEGIAS
     // ══════════════════════════════════════════════════════════════════
+    // ── Asignación automática de Cartera Sugerida según plazo ────────
+    // Regla: ≤1año → RF MP | ≤2años → Conservadora | ≤3años → Moderada | >3años → Agresiva
+    function getSimCarteraByPlazo(plazoAnos) {
+        if (plazoAnos <= 1) return { key: 'rf_mp',            rentAnual: 4.66,  nombre: 'Cartera RF MP',           color: '#0F766E' };
+        if (plazoAnos <= 2) return { key: 'est_conservadora', rentAnual: 6.80,  nombre: 'Estrategia Conservadora', color: '#0F766E' };
+        if (plazoAnos <= 3) return { key: 'est_moderada',     rentAnual: 7.94,  nombre: 'Estrategia Moderada',     color: '#B45309' };
+        return                     { key: 'est_agresiva',     rentAnual: 10.30, nombre: 'Estrategia Agresiva',     color: '#8B1D2A' };
+    }
+
+    // ── Actualiza el badge + panel derecho con la cartera seleccionada ─
+    function updateSimCarteraDisplay(ci) {
+        // Badge en el form
+        var badge = document.getElementById('simCarteraSugeridaBadge');
+        var rate  = document.getElementById('simCarteraRate');
+        if (badge) { badge.textContent = ci.nombre; badge.style.background = ci.color; }
+        if (rate)  { rate.textContent  = 'Tasa ref.: ' + ci.rentAnual.toFixed(2) + '% anual'; }
+
+        // Panel a la derecha del gráfico
+        var panel = document.getElementById('simCarteraPanel');
+        if (!panel) return;
+
+        var c = CARTERAS[ci.key];
+        if (!c) { panel.innerHTML = ''; return; }
+
+        var html = '<div class="sim-cartera-panel-title">Distribución de Cartera</div>';
+        html += '<div class="sim-cartera-panel-name" style="background:' + ci.color + ';">' + c.nombre + '</div>';
+        if (c.plazo) {
+            html += '<div style="font-size:9px;color:var(--text-muted);margin-bottom:10px;text-align:center;">⏱ ' + c.plazo + '</div>';
+        }
+
+        // Distribución por fondos
+        if (c.distribucion && c.distribucion.length) {
+            html += '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:7px;">Composición</div>';
+            c.distribucion.forEach(function(item) {
+                var barW = Math.max(6, Math.round(item.pct * 1.0));
+                html += '<div class="sim-cartera-distrib-row">'
+                    + '<div class="sim-cartera-distrib-dot" style="width:' + barW + 'px;background:' + ci.color + ';"></div>'
+                    + '<span style="flex:1;color:var(--text-secondary);font-size:10px;">' + item.fondo + '</span>'
+                    + '<span style="font-weight:700;color:var(--text-primary);font-size:10.5px;">' + item.pct + '%</span>'
+                    + '</div>';
+            });
+        }
+
+        // Retorno si disponible
+        if (c.retornos && c.retornos.m12 != null) {
+            html += '<div style="margin-top:10px;padding:8px 6px;background:#F0FDF4;border-radius:6px;text-align:center;">'
+                  + '<div style="font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--success);margin-bottom:2px;">Rent. Últ. 12M</div>'
+                  + '<div style="font-size:18px;font-weight:700;color:var(--success);">' + c.retornos.m12.toFixed(2) + '%</div>'
+                  + '</div>';
+        }
+
+        html += '<div style="font-size:8.5px;color:var(--text-muted);margin-top:8px;font-style:italic;text-align:center;">Tasa simulación: ' + ci.rentAnual.toFixed(2) + '% anual</div>';
+
+        panel.innerHTML = html;
+        panel.style.borderColor = ci.color;
+    }
+
     function selectStrategy(type) {
         currentStrategy = type;
         document.querySelectorAll('.strategy-card').forEach(c => c.classList.remove('active'));
@@ -1417,16 +2014,22 @@
         document.getElementById('simTitle').textContent   = cfg.title;
         document.getElementById('simPlazo').value         = cfg.plazo;
         document.getElementById('simBeneficio').innerHTML = cfg.beneficio;
+        // Sincronizar selector de objetivo con la estrategia activa
+        var simObj = document.getElementById('simObjetivo');
+        if (simObj) simObj.value = type === 'pension' ? 'pension' : type === 'caja' ? 'caja' : 'estudios';
         calcStrategy();
     }
 
     function calcStrategy() {
-        const aporte     = parseMonto(document.getElementById('simAporte').value) || 200000;
-        const plazoAnos  = parseInt(document.getElementById('simPlazo').value) || 5;
-        const perfilSel  = document.getElementById('simPerfil').value;
-        const inflacion  = parseFloat(document.getElementById('simInflacion').value) || 3;
+        const aporte    = parseMonto(document.getElementById('simAporte').value) || 200000;
+        const plazoAnos = parseInt(document.getElementById('simPlazo').value) || 5;
+        const inflacion = parseFloat(document.getElementById('simInflacion').value) || 3;
 
-        const rentAnual  = { conservador: 5, moderado: 8, agresivo: 12 }[perfilSel];
+        // Auto-asignar cartera y tasa según plazo (sin selección manual)
+        var carteraInfo  = getSimCarteraByPlazo(plazoAnos);
+        const rentAnual  = carteraInfo.rentAnual;
+        updateSimCarteraDisplay(carteraInfo);
+
         const meses      = plazoAnos * 12;
         const total      = aporte * meses;
 
@@ -1438,8 +2041,8 @@
         const rReal      = (1 + r) / (1 + rInfM) - 1;
         const capitalReal = aporte * ((Math.pow(1 + rReal, meses) - 1) / rReal);
 
-        const ganancia   = capitalNom - total;
-        const rentTotal  = (ganancia / total * 100).toFixed(1);
+        const ganancia  = capitalNom - total;
+        const rentTotal = (ganancia / total * 100).toFixed(1);
 
         document.getElementById('simTotalAportado').textContent = '$' + formatNumber(total);
         document.getElementById('simCapitalNom').textContent    = '$' + formatNumber(capitalNom);
@@ -1498,6 +2101,7 @@
         const q1 = document.querySelector('input[name="q1"]:checked');
         const objetivo = q1 ? objMap[q1.value] || 'N/D' : 'N/D';
 
+        // FM Dinámicos sugeridos
         const prods = [];
         document.querySelectorAll('#productsArea .product-card').forEach(c => {
             const n = c.querySelector('.product-name')?.textContent;
@@ -1505,23 +2109,51 @@
             if (n) prods.push(`• ${n} — Rent. 2025: ${r}`);
         });
 
+        // Cartera de Fidelización recomendada
+        var cartera = null, distribLines = [], retLines = [];
+        var cartKey2 = perfil ? getCarteraFidelizacion(perfil) : null;
+        if (cartKey2) {
+            var c2 = CARTERAS[cartKey2];
+            if (c2) {
+                cartera = c2.nombre + ' (' + c2.tipo + ')';
+                if (c2.distribucion) distribLines = c2.distribucion.map(function(d) { return '  ' + d.fondo + ': ' + d.pct + '%'; });
+                if (c2.retornos) {
+                    var r2 = c2.retornos;
+                    if (r2.m12   != null) retLines.push('  Últ. 12M: ' + r2.m12.toFixed(2)   + '%');
+                    if (r2.m6    != null) retLines.push('  Últ. 6M: '  + r2.m6.toFixed(2)    + '%');
+                    if (r2.m3    != null) retLines.push('  Últ. 3M: '  + r2.m3.toFixed(2)    + '%');
+                    if (r2.y2025 != null) retLines.push('  Año 2025: ' + r2.y2025.toFixed(2) + '%');
+                }
+            }
+        }
+
         return {
-            perfil:   perfil || 'No calculado',
-            score:    document.getElementById('resScore')?.textContent || '',
-            tol:      document.getElementById('statTol')?.textContent  || 'N/C',
-            risk:     document.getElementById('statRie')?.textContent  || 'N/C',
-            hor:      selHorizonte ? horMap[selHorizonte] : 'No seleccionado',
-            ser:      selHorizonte ? serMap[selHorizonte] : 'N/D',
+            perfil:       perfil || 'No calculado',
+            score:        document.getElementById('resScore')?.textContent || '',
+            tol:          document.getElementById('statTol')?.textContent  || 'N/C',
+            risk:         document.getElementById('statRie')?.textContent  || 'N/C',
+            hor:          selHorizonte ? horMap[selHorizonte] : 'No seleccionado',
+            ser:          selHorizonte ? serMap[selHorizonte] : 'N/D',
             objetivo,
-            prods
+            prods,
+            cartera,
+            distribLines,
+            retLines
         };
     }
 
-    const DISCLAIMER = '⚠️ Las rentabilidades pasadas no garantizan rentabilidades futuras. Esta información es de carácter referencial y no constituye asesoría de inversión. LarrainVial Asset Management para Consorcio.';
+    const DISCLAIMER = '⚠️ Las rentabilidades pasadas no garantizan rentabilidades futuras. Esta información es de carácter referencial y no constituye asesoría de inversión. Las rentabilidades están expresadas en valores nominales en pesos chilenos. LarrainVial Asset Management para Consorcio.';
 
     function shareWA() {
         if (!perfil) { toast('Calcule el perfil primero', 'err'); return; }
         const d = getShareData();
+        const carteraLines = d.cartera ? [
+            '',
+            '🏦 *CARTERA DE FIDELIZACIÓN RECOMENDADA*',
+            `• ${d.cartera}`,
+            ...(d.distribLines.length ? ['*Distribución:*', ...d.distribLines.map(l => l)] : []),
+            ...(d.retLines.length    ? ['*Rentabilidades (al cierre feb 2026):*', ...d.retLines.map(l => l)] : [])
+        ] : [];
         const msg = [
             '📊 *PERFILAMIENTO DE INVERSIÓN*',
             '*LarrainVial Asset Management para Consorcio*',
@@ -1537,8 +2169,9 @@
             `• Plazo: ${d.hor}`,
             `• Serie recomendada: ${d.ser}`,
             '',
-            '💼 *PRODUCTOS SUGERIDOS*',
+            '💼 *FM DINÁMICOS SUGERIDOS*',
             ...(d.prods.length ? d.prods : ['• Sin productos seleccionados']),
+            ...carteraLines,
             '',
             '━━━━━━━━━━━━━━━━━━━━━━━',
             `_${DISCLAIMER}_`,
@@ -1548,8 +2181,15 @@
     }
 
     function shareMail() {
-        const d   = getShareData();
+        const d    = getShareData();
         const subj = `Perfilamiento de Inversión — LarrainVial Asset Management para Consorcio`;
+        const carteraLines = d.cartera ? [
+            '',
+            'CARTERA DE FIDELIZACIÓN RECOMENDADA',
+            `Cartera: ${d.cartera}`,
+            ...(d.distribLines.length ? ['Distribución:', ...d.distribLines] : []),
+            ...(d.retLines.length    ? ['Rentabilidades (cierre feb 2026):', ...d.retLines] : [])
+        ] : [];
         const body = [
             'PERFILAMIENTO DE INVERSIÓN',
             'LarrainVial Asset Management para Consorcio',
@@ -1565,8 +2205,9 @@
             `Plazo: ${d.hor}`,
             `Serie recomendada: ${d.ser}`,
             '',
-            'PRODUCTOS SUGERIDOS',
+            'FM DINÁMICOS SUGERIDOS',
             ...(d.prods.length ? d.prods : ['Sin productos seleccionados']),
+            ...carteraLines,
             '',
             '-'.repeat(50),
             DISCLAIMER,
@@ -1578,12 +2219,16 @@
     function copyText() {
         if (!perfil) { toast('Calcule el perfil primero', 'err'); return; }
         const d = getShareData();
+        const carteraLine = d.cartera ? `\nCartera Fidelización: ${d.cartera}` +
+            (d.distribLines.length ? '\nDistribución: ' + d.distribLines.join(' | ') : '') +
+            (d.retLines.length    ? '\nRentabilidades: '    + d.retLines.join(' | ')   : '') : '';
         const lines = [
             `PERFILAMIENTO — LarrainVial Asset Management para Consorcio — ${new Date().toLocaleDateString('es-CL')}`,
             `Perfil: ${d.perfil} | ${d.score} | Tolerancia: ${d.tol} | Riesgo: ${d.risk}`,
             `Objetivo: ${d.objetivo}`,
             `Horizonte: ${d.hor} | ${d.ser}`,
-            `Productos: ${d.prods.map(p => p.replace('• ', '')).join(' / ') || 'N/A'}`,
+            `FM Dinámicos: ${d.prods.map(p => p.replace('• ', '')).join(' / ') || 'N/A'}`,
+            carteraLine,
             DISCLAIMER
         ].join('\n');
         navigator.clipboard.writeText(lines)
@@ -1649,6 +2294,7 @@
     // INIT
     // ══════════════════════════════════════════════════════════════════
     renderQuestions();
+    renderComposicionCarteras();   // rellena el bloque en sección Estrategias
     document.querySelectorAll('#productSelector input[type="checkbox"]:checked')
         .forEach(c => c.closest('.product-select-item').classList.add('checked'));
     calcProjection();
