@@ -139,6 +139,7 @@
         /* ── FORMS ──────────────────────────────────────────────────── */
         .form-grid   { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
         .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .form-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .form-label  { display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
         .form-label .req { color: var(--accent); }
 
@@ -608,6 +609,7 @@
         .riesgo-dot.active-mid  { background: var(--warning); }
         .riesgo-dot.active-high { background: var(--accent); }
 
+
         /* Footer */
         .footer { background: var(--primary-dark); color: white; padding: 24px 40px; margin-top: 48px; }
         .footer-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
@@ -658,7 +660,6 @@
 <nav class="nav-tabs">
     <div class="nav-tabs-inner">
         <div class="nav-tab active" data-tab="simulador">Perfilamiento</div>
-        <div class="nav-tab" data-tab="proyecciones">Proyecciones</div>
         <div class="nav-tab" data-tab="estrategias">Estrategias por Objetivo</div>
         <div class="nav-tab" data-tab="informacion">Información y Beneficios</div>
     </div>
@@ -764,130 +765,6 @@
 
         <div class="source-box">
             <strong>Fuentes:</strong> Normativa CMF (cmfchile.cl), NCG N°30, DL 3.500. Datos públicos y regulatorios — no se almacena información del cliente.
-        </div>
-    </section>
-
-    <!-- ════════════════════════════════════════════════════════════════
-         PROYECCIONES
-    ════════════════════════════════════════════════════════════════ -->
-    <section id="proyecciones" class="page-section">
-        <div class="page-header">
-            <div class="page-title">Proyección de Rentabilidad</div>
-            <div class="page-subtitle">Compare fondos en distintas series — visualice la evolución proyectada y renta mensual</div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="card-icon">💰</span>
-                <div><div class="card-title">Configuración de Proyección</div></div>
-            </div>
-            <div class="card-body">
-                <div class="form-grid-3">
-                    <div>
-                        <label class="form-label">Monto a Invertir ($)</label>
-                        <input type="text" id="projMonto" class="form-input" value="10.000.000" placeholder="10.000.000" oninput="formatMontoInput(this)">
-                    </div>
-                    <div>
-                        <label class="form-label">Plazo</label>
-                        <select id="projPlazo" class="form-select" onchange="calcProjection()">
-                            <option value="6">6 meses</option>
-                            <option value="12" selected>12 meses</option>
-                            <option value="24">24 meses</option>
-                            <option value="36">36 meses</option>
-                            <option value="48">48 meses</option>
-                            <option value="60">60 meses</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="form-label">Inflación anual (%)</label>
-                        <input type="number" id="projInflacion" class="form-input" value="2.4" step="0.1" onchange="calcProjection()">
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px;">
-                    <label class="form-label" style="margin-bottom: 10px;">Seleccione Productos y Serie</label>
-                    <div class="product-selector" id="productSelector">
-                        <div class="product-select-item" data-key="mon"><input type="checkbox" id="sel_mon" onchange="updateProjItem(this)"><span class="prod-name">FM LV Monetario</span><select id="serie_mon" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="cap"><input type="checkbox" id="sel_cap" checked onchange="updateProjItem(this)"><span class="prod-name">FM LV Ahorro Capital</span><select id="serie_cap" onchange="calcProjection()"><option value="A" selected>A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="corp"><input type="checkbox" id="sel_corp" onchange="updateProjItem(this)"><span class="prod-name">FM LV Ahorro Corporativo</span><select id="serie_corp" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="din"><input type="checkbox" id="sel_din" onchange="updateProjItem(this)"><span class="prod-name">FM CNS Ahorro Dinámico</span><select id="serie_din" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="dc"><input type="checkbox" id="sel_dc" checked onchange="updateProjItem(this)"><span class="prod-name">FM CNS Dinámico Conservador</span><select id="serie_dc" onchange="calcProjection()"><option value="A">A</option><option value="P" selected>P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="dm"><input type="checkbox" id="sel_dm" onchange="updateProjItem(this)"><span class="prod-name">FM CNS Dinámico Moderado</span><select id="serie_dm" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="db"><input type="checkbox" id="sel_db" onchange="updateProjItem(this)"><span class="prod-name">FM CNS Dinámico Balanceado</span><select id="serie_db" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="dcr"><input type="checkbox" id="sel_dcr" onchange="updateProjItem(this)"><span class="prod-name">FM CNS Dinámico Crecimiento</span><select id="serie_dcr" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="da"><input type="checkbox" id="sel_da" checked onchange="updateProjItem(this)"><span class="prod-name">FM CNS Dinámico Agresivo</span><select id="serie_da" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV" selected>APV</option></select></div>
-                        <div class="product-select-item" data-key="acc"><input type="checkbox" id="sel_acc" onchange="updateProjItem(this)"><span class="prod-name">FM LV Acciones Nacionales</span><select id="serie_acc" onchange="calcProjection()"><option value="A">A</option><option value="P">P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                        <div class="product-select-item" data-key="lat"><input type="checkbox" id="sel_lat" onchange="updateProjItem(this)"><span class="prod-name">FM LV Latinoamericano</span><select id="serie_lat" onchange="calcProjection()"><option value="A">A</option><option value="P" selected>P</option><option value="F">F</option><option value="APV">APV</option></select></div>
-                    </div>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="calcProjection()">📊 Calcular</button>
-                    <button class="btn btn-secondary" onclick="clearProj()">↺ Limpiar selección</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header alt">
-                <span class="card-icon">📈</span>
-                <div><div class="card-title">Resultados</div><div class="card-desc">Rentabilidades año 2025 (últimos 12 meses)</div></div>
-            </div>
-            <div class="card-body">
-                <!-- Los tres botones recalculan tabla + gráfico dinámicamente -->
-                <div class="toggle-group">
-                    <button class="toggle-btn active" onclick="toggleView(this, 'nominal')">Nominal (Anual)</button>
-                    <button class="toggle-btn" onclick="toggleView(this, 'real')">Real (desc. inflación)</button>
-                    <button class="toggle-btn" onclick="toggleView(this, 'mensual')">Mensualizado</button>
-                </div>
-
-                <div style="overflow-x: auto;">
-                    <table class="data-table" id="projTable">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Serie</th>
-                                <th id="thRent">Rent. Anual</th>
-                                <th>Monto Inicial</th>
-                                <th>Monto Final</th>
-                                <th>Ganancia</th>
-                                <th>Volatilidad</th>
-                            </tr>
-                        </thead>
-                        <tbody id="projBody">
-                            <tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:28px;">Seleccione productos para ver la proyección</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="renta-highlight" id="rentaHighlight" style="display:none;">
-                    <div class="renta-title">Renta Mensual Proyectada · Promedio de selección</div>
-                    <div class="renta-grid">
-                        <div class="renta-item">
-                            <div class="renta-label">Renta Mensual Nominal</div>
-                            <div class="renta-value" id="rentaMensualNom">$0</div>
-                            <div class="renta-sub">Antes de inflación</div>
-                        </div>
-                        <div class="renta-item">
-                            <div class="renta-label">Renta Mensual Real</div>
-                            <div class="renta-value" id="rentaMensualReal">$0</div>
-                            <div class="renta-sub">Descontada inflación (tasa compuesta)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart-container"><canvas id="projChart"></canvas></div>
-
-                <div class="disclaimer">
-                    <strong>⚠️ Información referencial e ilustrativa.</strong> Las proyecciones se basan en rentabilidades históricas 2025.
-                    <strong>Las rentabilidades pasadas no garantizan rentabilidades futuras.</strong> Consulte con su ejecutivo antes de invertir.
-                    Proyecciones calculadas con valores al 27/03/2026.
-                </div>
-            </div>
-        </div>
-
-        <div class="source-box">
-            <strong>Fuentes:</strong> Rentabilidades CMF (cmfchile.cl), Reportes LVAM, datos Consorcio Fondos. Datos públicos de mercado — no se cargan datos sensibles.
         </div>
     </section>
 
@@ -1489,8 +1366,8 @@
 
     // Estado global
     let selHorizonte = null, perfil = null, serieRes = 'A';
-    let projChart = null, strategyChart = null;
-    let viewMode = 'nominal', currentStrategy = 'edu';
+    let strategyChart = null;
+    let currentStrategy = 'edu';
 
     // ══════════════════════════════════════════════════════════════════
     // UTILIDADES
@@ -1801,141 +1678,6 @@
         document.getElementById('progressFill').style.width  = '0%';
         document.getElementById('progressText').textContent  = '0';
         selHorizonte = null; perfil = null; serieRes = 'A';
-    }
-
-    // ══════════════════════════════════════════════════════════════════
-    // PROYECCIONES
-    // ══════════════════════════════════════════════════════════════════
-    function updateProjItem(chk) {
-        chk.closest('.product-select-item').classList.toggle('checked', chk.checked);
-        calcProjection();
-    }
-
-    function clearProj() {
-        document.querySelectorAll('#productSelector input[type="checkbox"]').forEach(c => {
-            c.checked = false;
-            c.closest('.product-select-item').classList.remove('checked');
-        });
-        calcProjection();
-    }
-
-    // toggleView: actualiza viewMode y recalcula tabla + gráfico sin recargar
-    function toggleView(btn, mode) {
-        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        viewMode = mode;
-        const labels = { nominal: 'Rent. Anual', real: 'Rent. Real (desc. inflación)', mensual: 'Rent. Mensual' };
-        document.getElementById('thRent').textContent = labels[mode];
-        calcProjection(); // recalcula todo dinámicamente
-    }
-
-    function calcProjection() {
-        const monto          = parseMonto(document.getElementById('projMonto').value) || 10000000;
-        const plazo          = parseInt(document.getElementById('projPlazo').value) || 12;
-        const inflacionAnual = parseFloat(document.getElementById('projInflacion').value) || 2.4;
-
-        const tbody  = document.getElementById('projBody');
-        const results = [];
-        const keys   = ['mon','cap','corp','din','dc','dm','db','dcr','da','acc','lat'];
-
-        keys.forEach(k => {
-            const chk = document.getElementById(`sel_${k}`);
-            if (chk && chk.checked) {
-                const serie = document.getElementById(`serie_${k}`).value;
-                const d     = DATA[serie][k];
-                if (d) results.push({ key: k, name: d.n, serie: serie === 'APV' ? 'APV-AP' : serie, serieKey: serie, y25: d.y25, vol: d.vol });
-            }
-        });
-
-        if (results.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:28px;">Seleccione productos para ver la proyección</td></tr>';
-            document.getElementById('rentaHighlight').style.display = 'none';
-            if (projChart) projChart.destroy();
-            return;
-        }
-
-        tbody.innerHTML = '';
-        let totalNom = 0, totalReal = 0;
-
-        results.forEach(r => {
-            const rentAnual = r.y25;
-
-            // Conversión anual → mensual (tasa compuesta, no simple)
-            const rMens  = Math.pow(1 + rentAnual / 100, 1 / 12) - 1;
-            const rInfM  = Math.pow(1 + inflacionAnual / 100, 1 / 12) - 1;
-
-            // Monto final proyectado al plazo dado
-            const montoFinal = monto * Math.pow(1 + rMens, plazo);
-            const ganancia   = montoFinal - monto;
-
-            // Tasa a mostrar según modo activo:
-            // nominal  → tasa anual directa
-            // real     → deflacta por inflación anual (compuesta)
-            // mensual  → tasa mensual equivalente (compuesta)
-            let rentDisplay;
-            if      (viewMode === 'real')    rentDisplay = ((1 + rentAnual / 100) / (1 + inflacionAnual / 100) - 1) * 100;
-            else if (viewMode === 'mensual') rentDisplay = rMens * 100;
-            else                            rentDisplay = rentAnual;
-
-            // Renta mensual: nominal y real (tasa real compuesta, no resta simple)
-            const rRealM = (1 + rMens) / (1 + rInfM) - 1;
-            totalNom  += monto * rMens;
-            totalReal += monto * rRealM;
-
-            tbody.innerHTML += `<tr>
-                <td><strong>${r.name}</strong></td>
-                <td><span style="background:var(--primary);color:white;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;">${r.serie}</span></td>
-                <td class="${rentDisplay >= 0 ? 'up' : 'down'}">${rentDisplay.toFixed(viewMode === 'mensual' ? 4 : 2)}%</td>
-                <td>$${formatNumber(monto)}</td>
-                <td class="${ganancia >= 0 ? 'up' : 'down'}">$${formatNumber(montoFinal)}</td>
-                <td class="${ganancia >= 0 ? 'up' : 'down'}">$${formatNumber(ganancia)}</td>
-                <td>${r.vol.toFixed(2)}%</td>
-            </tr>`;
-        });
-
-        document.getElementById('rentaMensualNom').textContent  = '$' + formatNumber(totalNom  / results.length);
-        document.getElementById('rentaMensualReal').textContent = '$' + formatNumber(totalReal / results.length);
-        document.getElementById('rentaHighlight').style.display = 'block';
-
-        renderChart(results, plazo, monto);
-    }
-
-    function renderChart(results, plazo, monto) {
-        const ctx = document.getElementById('projChart').getContext('2d');
-        if (projChart) projChart.destroy();
-
-        const colors = ['#1E3A5F','#8B1D2A','#0F766E','#B45309','#6B21A8','#0369A1','#BE185D','#047857','#7C3AED','#DC2626','#2563EB'];
-        const months = Array.from({ length: plazo + 1 }, (_, i) => i === 0 ? 'Inicio' : `M${i}`);
-
-        const datasets = results.map((r, i) => {
-            const rm   = Math.pow(1 + r.y25 / 100, 1 / 12) - 1;
-            const data = Array.from({ length: plazo + 1 }, (_, m) => Math.round(monto * Math.pow(1 + rm, m)));
-            return {
-                label:           `${r.name} (${r.serie})`,
-                data,
-                borderColor:     colors[i % colors.length],
-                backgroundColor: colors[i % colors.length] + '12',
-                fill: false, tension: 0.3, borderWidth: 2,
-                pointRadius: plazo <= 12 ? 3 : 0
-            };
-        });
-
-        projChart = new Chart(ctx, {
-            type: 'line',
-            data: { labels: months, datasets },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 10, padding: 14 } },
-                    title:  { display: true, text: 'Evolución Proyectada del Capital', font: { size: 12, weight: '600' }, color: '#111827', padding: { bottom: 10 } },
-                    tooltip: { callbacks: { label: c => `${c.dataset.label}: $${formatNumber(c.parsed.y)}` } }
-                },
-                scales: {
-                    y: { beginAtZero: false, grid: { color: '#F3F4F6' }, ticks: { callback: v => '$' + (v >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : formatNumber(v)), font: { size: 10 } } },
-                    x: { grid: { display: false }, ticks: { font: { size: 10 } } }
-                }
-            }
-        });
     }
 
     // ══════════════════════════════════════════════════════════════════
@@ -2295,9 +2037,6 @@
     // ══════════════════════════════════════════════════════════════════
     renderQuestions();
     renderComposicionCarteras();   // rellena el bloque en sección Estrategias
-    document.querySelectorAll('#productSelector input[type="checkbox"]:checked')
-        .forEach(c => c.closest('.product-select-item').classList.add('checked'));
-    calcProjection();
     calcStrategy();
 </script>
 </body>
